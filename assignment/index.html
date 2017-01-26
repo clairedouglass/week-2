@@ -57,8 +57,34 @@
 
       var jsonToCsv = function(json) { console.log(json); };
 
+  //Define new array for health center data
+    var data = healthCenters;
+    var healthArray = [];
+    healthArray.push(Object.keys(data[0]));
 
-      var addMarkers = function(map) {};
+  //loop through health center data and push properties into the new "healthArray" array
+    for (var i = 0; i < data.length; i++){
+      for (j in data[i]) {
+        healthArray[i+1] = Object.values(data[i]);
+      };
+    };
+    console.log("New Array", healthArray)
+
+    //Define tooth icon 
+    var myIcon = L.icon({
+      iconUrl: "tooth-icon.png",
+      iconSize: [40, 40],
+      inconAnchor: [20, 40]
+    });
+
+    //Add markers to map
+    var addMarkers = function(map) {
+      for (var i = 0; i < healthArray.length; i++) {
+        if (healthArray[i][8] === "N/A") {
+            L.marker([healthArray[i][1], healthArray[i][0]]).addTo(map).bindPopup(healthArray[i][3]);
+        }else{
+              L.marker([healthArray[i][1], healthArray[i][0]], {icon:myIcon}).addTo(map).bindPopup(healthArray[i][3]);
+            };
 
       /* =====================
 
@@ -69,6 +95,7 @@
 
       jsonToCsv(healthCenters);
       addMarkers(map);
+
     </script>
     <!--Your code ends here-->
   </body>

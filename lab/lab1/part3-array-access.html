@@ -74,10 +74,16 @@
     Start code
 
     ===================== */
+var restaurantData = [
+  [39.954169, -75.175968, 'location 1'],
+  [39.946754, -75.157612, 'location 2'],
+  [39.950290, -75.167555, 'location 3'],
+];
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+for (var i = 0; i < restaurantData.length; i++) {
+    L.marker([restaurantData[i][0],restaurantData[i][1]]).bindPopup(restaurantData[i][2]).openPopup(restaurantData[i][2]).addTo(map)
+  };
+
 
     /* =====================
 
